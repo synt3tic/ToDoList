@@ -7,7 +7,7 @@
       :key="task.id"
       :task="task"
       @remove="$emit('remove', task)"
-      @ready="isTaskReady"
+      @statusChange="isTaskReady"
       @edit="editTask"
     />
   </div>
@@ -35,7 +35,7 @@ export default {
     editTask(taskId) {
       this.tasks.map((el) => {
         if (el.id === taskId) {
-          el.editStatus = true;
+          console.log(this.editStatus);
         }
       });
     },

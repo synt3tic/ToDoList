@@ -5,7 +5,10 @@
       >Создать задачу</my-button
     >
     <my-dialog v-model:show="dialogVisible">
-      <task-form @create="createTask"></task-form>
+      <task-form
+        @create="createTask"
+        @closeDialog="closeDialogWindow"
+      ></task-form>
     </my-dialog>
     <task-list
       :tasks="tasks"
@@ -19,6 +22,7 @@
 import TaskForm from "./components/TaskForm.vue";
 import TaskList from "./components/TaskList.vue";
 import MyDialog from "./components/UI/MyDialog.vue";
+
 export default {
   components: {
     TaskForm,
@@ -30,10 +34,10 @@ export default {
       tasks: [
         {
           title: "Сделать приложение",
-          body: "Сделай нормальное приложение, через три месяца надо уже прогером нормальным быть",
+          description:
+            "Сделай нормальное приложение, через три месяца надо уже прогером нормальным быть",
           id: 1,
           status: false,
-          editStatus: false,
         },
       ],
       dialogVisible: false,
@@ -48,6 +52,9 @@ export default {
     },
     showDialog() {
       this.dialogVisible = true;
+    },
+    closeDialogWindow() {
+      this.dialogVisible = false;
     },
   },
 };

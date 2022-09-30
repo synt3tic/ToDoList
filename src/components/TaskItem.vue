@@ -1,47 +1,45 @@
 <template>
   <div class="task">
-    <div v-if="!task.editStatus">
-      <div :class="{ task__ready: task.status }">
+    <div v-if="!editStatus">
+      <div :class="{ task_ready: task.status }">
         <strong>Название:</strong> {{ task.title }}
       </div>
-      <div :class="{ task__ready: task.status }">
-        <strong>Описание:</strong> {{ task.body }}
+      <div :class="{ task_ready: task.status }">
+        <strong>Описание:</strong> {{ task.description }}
       </div>
     </div>
     <div v-else>
-      <div :class="{ task__ready: task.status }">
+      <div :class="{ task_ready: task.status }">
         <strong>Название:</strong>
         <my-input type="text" v-model="task.title" />
       </div>
-      <div :class="{ task__ready: task.status }">
+      <div :class="{ task_ready: task.status }">
         <strong>Описание:</strong>
-        <my-input class="input" type="text" v-model="task.body" />
+        <my-input class="input" type="text" v-model="task.description" />
       </div>
-      <my-button @click="editTask">Сохранить изменения</my-button>
     </div>
     <div class="btns">
-      <my-button class="task__btn" @click="$emit('ready', task.id)"
-        >Выполнена</my-button
-      >
-      <my-button
-        v-show="!task.status"
-        class="task__btn"
-        @click="$emit('edit', task.id)"
-        >Редактировать</my-button
-      >
+      <my-button class="task__btn" @click="$emit('statusChange', task.id)">{{
+        taskStatusButton
+      }}</my-button>
+      <my-button v-show="!task.status" class="task__btn" @click="editTask">{{
+        editStatusValue
+      }}</my-button>
       <my-button class="task__btn" @click="$emit('remove', task)"
         >Удалить</my-button
       >
-      <div v-show="task.status" style="color: teal">Выполнена ✓</div>
+      <div style="color: teal">{{ taskStatus }}</div>
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  data: () => ({
-    editStatus: false,
-  }),
+  data() {
+    return {
+      editStatus: false,
+    };
+  },
   props: {
     task: {
       type: Object,
@@ -50,7 +48,30 @@ export default {
   },
   methods: {
     editTask() {
-      this.task.editStatus = false;
+      this.editStatus = !this.editStatus;
+    },
+  },
+  computed: {
+    taskStatus: function () {
+      if (this.task.status) {
+        return "Выполнена ✓";
+      } else {
+        return "В процессе ◉";
+      }
+    },
+    taskStatusButton: function () {
+      if (this.task.status) {
+        return "Не выполнена";
+      } else {
+        return "Выполнена";
+      }
+    },
+    editStatusValue: function () {
+      if (this.editStatus) {
+        return "Сохранить изменения";
+      } else {
+        return "Редактировать";
+      }
     },
   },
 };
@@ -67,7 +88,7 @@ export default {
   margin: 3px;
 }
 
-.task__ready {
+.task_ready {
   text-decoration: line-through;
   color: gray;
 }
