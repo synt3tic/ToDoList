@@ -31,15 +31,7 @@ export default {
   },
   data() {
     return {
-      tasks: [
-        {
-          title: "Сделать приложение",
-          description:
-            "Сделай нормальное приложение, через три месяца надо уже прогером нормальным быть",
-          id: 1,
-          status: false,
-        },
-      ],
+      tasks: [],
       dialogVisible: false,
     };
   },
