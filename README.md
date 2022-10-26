@@ -1,19 +1,5 @@
-# task-manager
+# todo-lis
 
-## Project setup
-```
-npm install
-```
+В приложении вы можете создавать задачи, составляя список задач.
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+Имеется возможность добавить новую задачу, удалить или редактировать уже существующую. А так же можно ставить отметку о выполнении задачи.
